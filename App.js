@@ -1,8 +1,13 @@
 import React, {Component, Fragment} from 'react';
-import {StyleSheet, Text, View, TextInput} from 'react-native';
+import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 
 export default class App extends Component {
   state = { artist: '', title: '' }
+
+  getLyrics = () => {
+    this.setState({ artist: '', title: ''})
+  }
+  
   render() {
     const { artist, title } = this.state
 
@@ -21,6 +26,11 @@ export default class App extends Component {
           style={styles.input}
           onChangeText={ (text) => this.setState({ title: text }) }
         />
+        { (artist !== '' && title !== '') &&
+          <TouchableOpacity onPress={this.getLyrics}>
+            <Text style={styles.button}>Get Lyrics</Text>
+          </TouchableOpacity>
+        }
       </View>
     );
   }

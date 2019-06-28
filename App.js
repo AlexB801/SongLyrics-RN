@@ -7,7 +7,7 @@ export default class App extends Component {
   getLyrics = () => {
     this.setState({ artist: '', title: ''})
   }
-  
+
   render() {
     const { artist, title } = this.state
 
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     paddingTop: 80,
-    backgroundColor: '#50C878',
+    backgroundColor: '#7FFFD4',
   },
   label: {
     marginLeft: 5,
@@ -58,4 +58,17 @@ const styles = StyleSheet.create({
     fontSize: 50,
     textAlign: 'center',
   },
+  button: {
+    backgroundColor: '#00FFFF',
+    textAlign: 'center',
+    justifyContent: 'center',
+    marginTop: 5,
+    marginRight: 100,
+    marginBottom: 5,
+    marginLeft: 100,
+    paddingTop: 5,
+    paddingBottom: 5,
+    borderWidth: 1.5,
+    borderColor: 'grey',
+  }
 });

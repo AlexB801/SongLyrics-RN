@@ -1,15 +1,25 @@
 import React, {Component, Fragment} from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
+import axios from 'axios';
+
+const BASE_URL = 'https://api.lyrics.ovh/v3/'
 
 export default class App extends Component {
-  state = { artist: '', title: '' }
+  state = { artist: '', title: '', lyrics: '' }
 
   getLyrics = () => {
-    this.setState({ artist: '', title: ''})
+    const { artist, title} = this.state;
+    axios.get(`$BASE_URL}${artist}/${title}`)
+      .then( ({ data }) => {
+        this.setState({ artist: '', title: '', lyrics: data.lyrics })
+      }).catch( err => {
+        const lyrics = `Could not find the song ${title} by ${artist}.`
+        this.setState({ lyrics })
+      });
   }
 
   render() {
-    const { artist, title } = this.state
+    const { artist, title, lyrics } = this.state
 
     return (
       <View style={styles.container}>
@@ -31,6 +41,7 @@ export default class App extends Component {
             <Text style={styles.button}>Get Lyrics</Text>
           </TouchableOpacity>
         }
+        <Text>{lyrics}</Text>
       </View>
     );
   }
@@ -57,6 +68,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 50,
     textAlign: 'center',
+    fontFamily: 'ChalkboardSE-Bold',
   },
   button: {
     backgroundColor: '#00FFFF',
@@ -70,5 +82,6 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     borderWidth: 1.5,
     borderColor: 'grey',
+    fontFamily: 'ChalkboardSE-Regular',
   }
 });
